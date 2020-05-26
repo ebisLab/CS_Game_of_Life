@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import produce from 'immer'
 
 function App() {
   const rows_number = 20; //TO BE DYNAMIC
@@ -34,8 +35,21 @@ gridTemplateColumns: `repeat(${cols_number}, 21px)`}}>
     rows.map((cols,j) =>(
       <div 
       key={`${i}-${j}`}
+      onClick={()=>{
+        //set current value to 1
+        //we need to mutate the state
+        const newGrid = produce(grid, gridCopy => {
+          //creating a new grid value
+          //alive || dead toggle
+          gridCopy[i][j]=grid[i][j]? 0: 1
+        } )
+        setGrid(newGrid)
+        console.log('I clicked this')
+      }}
       style={{width: 20, 
-        height: 20, border: '1px solid black'}}>{cols}</div>
+        height: 20,
+        background: grid[i][j]?'black': undefined,
+         border: '1px solid black'}}>{cols}</div>
     ))
   // <div style={{border: '1px solid black', display: 'grid'}}>{row}</div>
   ))}
