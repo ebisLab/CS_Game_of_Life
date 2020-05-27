@@ -5,6 +5,7 @@ import produce from 'immer'
 
 
 function App() {
+  const[generation, setgeneration]=useState(0)
   const rows_number = 20; //TO BE DYNAMIC
   const cols_number = 20; //TO BE DYNAMIC
 
@@ -30,6 +31,8 @@ function App() {
 
 
   const start_Program = useCallback(() => {
+        setgeneration(prevstate =>(prevstate+=1))
+
       console.log('similuation is supposed to run')
 
       //need to mutate new grid values
@@ -89,6 +92,7 @@ function App() {
   return (
     <div className="App">
       <h1>Conway Game of Life</h1>
+      <h3>{generation}</h3>
       <button
       onClick={()=>{
           setRunProgram(!runProgram)
@@ -121,13 +125,14 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
         console.log('I clicked this')
       }}
       style={{width: 25, 
-        height: 25,
+        height: 22,
         background: grid[i][j]?'black': undefined,
          border: '1px solid black'}}>{cols}</div>
     ))
   ))}
 </div>
 <div>
+  <h3>Generation: </h3>
 </div>
     </div>
   
