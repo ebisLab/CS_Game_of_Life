@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState,useCallback} from 'react';
 import './App.css';
 import produce from 'immer'
 
@@ -7,7 +7,6 @@ import produce from 'immer'
 function App() {
   const rows_number = 20; //TO BE DYNAMIC
   const cols_number = 20; //TO BE DYNAMIC
-
 
   const createGrid=()=>{
     const rows = []
@@ -20,14 +19,12 @@ function App() {
 
   const [grid, setGrid]= useState(createGrid)
 
-  const [running, setRunning]= useState(false)
+  const [runProgram, setRunProgram]= useState(false)
 
-  const start_ProgramRef= useRef(running);
-  start_ProgramRef.current=running
 
   const start_Program = useCallback(() => {
       console.log('similuation is supposed to run')
-      if (!start_Program.current){
+      if (!runProgram){
           return;
       }
 
@@ -40,10 +37,10 @@ function App() {
                     let neighbor = 0;
 
                     if(gridCopy[i][j+1]===1){
-                      neighbor +=1
+                      neighbor +=1;
                     }
-                    if(gridCopy[i-1][j+1]===1){
-                      neighbor -=1
+                    else if(gridCopy[i-1][j+1]===1){
+                      neighbor -=1;
                     }
 
       
@@ -73,8 +70,7 @@ function App() {
       <h1>Conway Game of Life</h1>
       <button
       onClick={()=>{
-          setRunning(!running)
-          start_Program.current = true;
+          setRunProgram(!runProgram)
           start_Program()
           console.log('I clicked on start!')
         }}
