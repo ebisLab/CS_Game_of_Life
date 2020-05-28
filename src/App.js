@@ -7,6 +7,7 @@ import produce from 'immer'
 function App() {
   const[generation, setgeneration]=useState(0)
   const [speed, setSpeed]=useState(500)
+  const[color, setColor]=useState('')
   const rows_number = 20; //TO BE DYNAMIC
   const cols_number = 20; //TO BE DYNAMIC
 
@@ -158,7 +159,7 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
       }}
       style={{width: 25, 
         height: 22,
-        background: grid[i][j]?'black': undefined,
+        background: grid[i][j]? color : undefined,
          border: '1px solid black'}}>{cols}</div>
     ))
   ))}
@@ -170,6 +171,12 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
   <button onClick={increaseSpeed}>+</button>
   <button onClick={decreaseSpeed}>-</button>
 
+</div>
+
+<div>
+  <h2>Color:</h2>
+  <input type="color" value={color} onChange={(e)=> setColor(e.target.value)}/>
+  {console.log('color', color)}
 </div>
 
 </div>
