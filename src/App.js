@@ -91,8 +91,8 @@ function App() {
 
   return (
     <div className="App">
+      <section>
       <h1>Conway Game of Life</h1>
-      <h3>{generation}</h3>
       <button
       onClick={()=>{
           setRunProgram(!runProgram)
@@ -101,8 +101,10 @@ function App() {
           console.log('I clicked on start!')
         }}
       >{runProgram? 'Pause': 'Start'}</button>
+      </section>
 
 {/* grid */}
+<div style={{display: 'inline-flex'}}>
 <div 
 style={{display: 'grid',
 justifyContent: 'center',
@@ -131,8 +133,9 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
     ))
   ))}
 </div>
-<div>
-  <h3>Generation: </h3>
+<div style={{ padding: "20px", right:" 200px", position: "absolute"}}>
+      <h3>Generation: {generation}</h3>
+</div>
 </div>
     </div>
   
