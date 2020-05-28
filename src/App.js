@@ -22,6 +22,18 @@ function App() {
     return rows
   }
 
+  const randomizeGrid=()=>{
+    const row=[];
+        for(let i=0; i<rows_number; i++){
+          row.push(Array.from(Array(cols_number), ()=>Math.random()>0.5 ? 1:0))
+        }
+        console.log('randomiii', row)
+
+    setGrid(row)
+  }
+
+
+
   const [grid, setGrid]= useState(createGrid)
 
   const [runProgram, setRunProgram]= useState(false)
@@ -64,7 +76,7 @@ function App() {
                         }
                     });
 
-
+                    //between 2 and 3 it does nothing
                     if (neighbor < 2 || neighbor >3){
                         gridCopy[i][j]=0;
                     }
@@ -86,7 +98,7 @@ function App() {
           return
       }
         start_Program()}, 500);
-      },[])
+      },[coordinates])
 
 
   return (
@@ -96,11 +108,13 @@ function App() {
       <button
       onClick={()=>{
           setRunProgram(!runProgram)
-          start_ProgramRef.current = true;
+          // start_ProgramRef.current = true;
           start_Program()
           console.log('I clicked on start!')
         }}
       >{runProgram? 'Pause': 'Start'}</button>
+      <button
+      onClick={randomizeGrid}>Randomize</button>
       </section>
 
 {/* grid */}
@@ -135,6 +149,9 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
 </div>
 <div style={{ padding: "20px", right:" 200px", position: "absolute"}}>
       <h3>Generation: {generation}</h3>
+
+
+    {/* <div>{console.log('random', randomarr.map(i=>i))}</div> */}
 </div>
 </div>
     </div>
