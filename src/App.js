@@ -100,7 +100,7 @@ function App() {
           start_Program()
           console.log('I clicked on start!')
         }}
-      >Run</button>
+      >{runProgram? 'Pause': 'Start'}</button>
 
 {/* grid */}
 <div 
