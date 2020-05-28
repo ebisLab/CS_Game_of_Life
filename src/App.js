@@ -6,6 +6,7 @@ import produce from 'immer'
 
 function App() {
   const[generation, setgeneration]=useState(0)
+  const [speed, setSpeed]=useState(500)
   const rows_number = 20; //TO BE DYNAMIC
   const cols_number = 20; //TO BE DYNAMIC
 
@@ -22,6 +23,8 @@ function App() {
     return rows
   }
 
+
+
   const randomizeGrid=()=>{
     const row=[];
         for(let i=0; i<rows_number; i++){
@@ -30,6 +33,18 @@ function App() {
         console.log('randomiii', row)
 
     setGrid(row)
+  }
+
+  const changespeed= (e)=>{
+    setSpeed(Number(e.currentTarget.value))
+    }
+
+  const increaseSpeed = e=>{
+    setSpeed(speed +10)
+  }
+
+  const decreaseSpeed = e=>{
+    setSpeed(speed -10)
   }
 
 
@@ -91,15 +106,16 @@ function App() {
 
       })
 
-
       //simulation
       setTimeout(()=>{
         if (!start_ProgramRef.current){
           return
       }
-        start_Program()}, 500);
+        start_Program()}, speed);
       },[coordinates])
 
+console.log('speed', speed)
+console.log('speed', typeof speed)
 
   return (
     <div className="App">
@@ -149,9 +165,13 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
 </div>
 <div style={{ padding: "20px", right:" 200px", position: "absolute"}}>
       <h3>Generation: {generation}</h3>
+<div>
+  <h2><input style={{border: 'none', fontSize: 40, width: 100, fontWeight: 'bolder'}}value={speed} onChange={changespeed}/></h2>
+  <button onClick={increaseSpeed}>+</button>
+  <button onClick={decreaseSpeed}>-</button>
 
+</div>
 
-    {/* <div>{console.log('random', randomarr.map(i=>i))}</div> */}
 </div>
 </div>
     </div>
