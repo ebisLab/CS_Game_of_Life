@@ -3,7 +3,6 @@ import './App.css';
 import produce from 'immer'
 import Modal from 'react-bootstrap/Modal'
 import { Button } from 'react-bootstrap'; 
-// import Button from 'react-bootstrap/Button';
 
 
 function App() {
@@ -62,7 +61,9 @@ function App() {
 
 
   const start_Program = useCallback(() => {
+
         setgeneration(prevstate =>(prevstate+=1))
+
 
       console.log('similuation is supposed to run')
 
@@ -118,8 +119,6 @@ function App() {
         start_Program()}, speed);
       },[coordinates])
 
-console.log('speed', speed)
-console.log('speed', typeof speed)
 
   return (
     <div className="App">
@@ -138,6 +137,13 @@ console.log('speed', typeof speed)
       >{runProgram? 'Pause': 'Start'}</button>
       <button
       onClick={randomizeGrid}>Randomize</button>
+            <button
+      onClick={()=>{
+        setGrid(createGrid())
+        setgeneration(0)
+          console.log('I clicked on start!')
+        }}
+      >clear</button>
       </section>
 
 {/* grid */}
@@ -146,7 +152,7 @@ console.log('speed', typeof speed)
 style={{display: 'grid',
 justifyContent: 'center',
 padding: 10,
-gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
+gridTemplateColumns: `repeat(${cols_number}, 24px)`}}>
   {grid.map((rows,i)=>(
     //for every row render a column
     rows.map((cols,j) =>(
