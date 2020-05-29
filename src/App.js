@@ -10,7 +10,7 @@ import Sidebar from './SideBar';
 
 function App() {
   const[generation, setgeneration]=useState(0)
-  const [speed, setSpeed]=useState(500)
+  const [speed, setSpeed]=useState(20)
   const[color, setColor]=useState('white')
   const [show, setShow] = useState(false);
   const rows_number = 20; //TO BE DYNAMIC
@@ -120,7 +120,7 @@ function App() {
 
   return (
 <div className="App">
-      <section>
+      <section style={{marginTop: 50}}>
       <h1>Conway Game of Life</h1>
       <ButtonController
       runProgram={runProgram}
