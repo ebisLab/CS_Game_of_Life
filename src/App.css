@@ -45,7 +45,8 @@ html{
 }
 
 h1,h2,h3,h4,h5{
-  color:#fdee49;
+  /* color:#fdee49; */
+  color: #f3f1d5;
   text-shadow: 0 0 5px #fff1cc;
 }
 
@@ -57,66 +58,39 @@ h1,h2,h3,h4,h5{
 
 input:focus{
   outline: none;
+  background: #21a0a0
+}
+
+.modalmenu{
+    position: absolute;
+    left: 50px;
+    top: 20px;
 }
 
 
+/* -------* ---* */
 
+.cursor {
+	position: relative;
+}
+.cursor	i {
+	position: absolute;
+	width: 1px;
+	height: 50%;
+	background-color: #ff1696;
+	right: 45px;
+	top: 25%;
+	animation-name: blink;
+	animation-duration: 800ms;
+	animation-iteration-count: infinite;
+	opacity: 1;
+}
 
-
-.blinking-cursor {
-  font-size: 40px;
-  animation: 1s blink step-end infinite;
-  top: -5px;
-  left: -25px;
-  position: relative;
-  -webkit-animation: 1s blink step-end infinite;
-  -moz-animation: 1s blink step-end infinite;
-  -ms-animation: 1s blink step-end infinite;
-  -o-animation: 1s blink step-end infinite;
-  animation: 1s blink step-end infinite;
+.cursor input:focus + i {
+	display: none;
 }
 
 @keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: white;
-  }
-}
-
-@-moz-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: black;
-  }
-}
-
-@-webkit-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: white;
-  }
-}
-
-@-ms-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: white;
-  }
-}
-
-@-o-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: white;
-  }
+	from { opacity: 1; }
+	to { opacity: 0; }
 }

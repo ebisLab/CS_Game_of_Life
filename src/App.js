@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
 import './App.css';
 import produce from 'immer'
-import Modal from 'react-bootstrap/Modal'
 import { Button } from 'react-bootstrap'; 
+import InfoModal from './InfoModal'
 
 
 function App() {
@@ -33,8 +33,6 @@ function App() {
         for(let i=0; i<rows_number; i++){
           row.push(Array.from(Array(cols_number), ()=>Math.random()>0.5 ? 1:0))
         }
-        console.log('randomiii', row)
-
     setGrid(row)
   }
 
@@ -63,9 +61,6 @@ function App() {
   const start_Program = useCallback(() => {
 
         setgeneration(prevstate =>(prevstate+=1))
-
-
-      console.log('similuation is supposed to run')
 
       //need to mutate new grid values
       setGrid((current_grid)=>{
@@ -117,14 +112,14 @@ function App() {
           return
       }
         start_Program()}, speed);
-      },[coordinates])
+      },[coordinates, speed])
 
 
   return (
     <div className="App">
-       <Button variant="primary" onClick={() => setShow(true)}>
+       {/* <Button variant="primary" onClick={() => setShow(true)}>
         About
-      </Button>
+      </Button> */}
       <section>
       <h1>Conway Game of Life</h1>
       <Button
@@ -134,7 +129,6 @@ function App() {
           setRunProgram(!runProgram)
           // start_ProgramRef.current = true;
           start_Program()
-          console.log('I clicked on start!')
         }}
       >{runProgram? 'Pause': 'Start'}</Button>
       <Button
@@ -148,18 +142,21 @@ function App() {
         setGrid(createGrid())
         setRunProgram(false)
         setgeneration(0)
-          console.log('I clicked on start!')
         }}
       >clear</Button>
       </section>
 
 {/* grid */}
 <div style={{display: 'inline-flex'}}>
+  <div className="modalmenu"><Button variant="warning" onClick={() => setShow(true)}>
+        About
+      </Button></div>
+
 <div 
 style={{display: 'grid',
 justifyContent: 'center',
 padding: 10,
-gridTemplateColumns: `repeat(${cols_number}, 24px)`}}>
+gridTemplateColumns: `repeat(${cols_number}, 20px)`}}>
   {grid.map((rows,i)=>(
     //for every row render a column
     rows.map((cols,j) =>(
@@ -176,23 +173,30 @@ gridTemplateColumns: `repeat(${cols_number}, 24px)`}}>
         setGrid(newGrid)
         console.log('I clicked this')
       }}
-      style={{width: 25, 
-        height: 22,
+      style={{width: 20, 
+        height: 20,
         boxShadow: grid[i][j]? "0px 0px 10px 0px #b3d8ff": undefined,
         background: grid[i][j]? color : undefined,
-         border: '1px solid black'}}>{cols}</div>
+        border: '1px solid #21a0a0'
+
+        // border: '1px solid #68ffff'
+      }}>{cols}</div>
+        
     ))
   ))}
 </div>
+{/* side bar */}
 <div style={{ padding: "20px", right:" 100px", position: "absolute"}}>
       <h3>Generation: {generation}</h3>
+
+
 <div style={{display: 'inline-flex'}}>
-s
+
   <Button variant="danger" style={{height: "40px", top: "30px", position: "relative"}} onClick={increaseSpeed}>+</Button>
-  <div id="input_container" style={{ position:"relative", padding:0, margin:0}}>
-  <input id="input" style={{border: 'none', fontSize: 40, width: '140px', fontWeight: 'bolder',padding: '20px', background: "#301547",
-    color: "#ff1696"}}value={speed} onChange={changespeed}/>
-    <span className="blinking-cursor">|</span>
+  <div className="cursor" style={{ position:"relative", padding:0, margin:0}}>
+  <input className="rq-form-element" style={{border: 'none', fontSize: 40, width: '140px', fontWeight: 'bolder',padding: '20px', background: "#301547",
+    color: "#ff1696"}} value={speed} onChange={changespeed}/>
+    <i></i>
     </div>
   <Button variant="danger" style={{height: "40px", top: "30px", position: "relative"}} onClick={decreaseSpeed}>-</Button>
 
@@ -208,57 +212,7 @@ s
 </div>
 
 
-<Modal
-        show={show}
-        onHide={() => setShow(false)}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-           About
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-          The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, 
-          each of which is in one of two possible states, live or dead, (or populated and unpopulated, respectively). 
-          Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or
-           diagonally adjacent.
-          </p>
-        </Modal.Body>
-        <Modal.Header>
-          <Modal.Title id="example-custom-modal-styling-title">
-           Rules
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-            <ol>
-          <li>Any live cell with two or three live neighbours lives on to the next generation.
-</li>
-<li>Any live cell with more than three live neighbours dies, as if by overpopulation.
-</li>
-<li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-</li>
-</ol>          </p>
-        </Modal.Body>
-        <Modal.Header>
-          <Modal.Title id="example-custom-modal-styling-title">
-           Get started
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-            <li>You have the option of manually selecting any number of tiles OR clicking the random button for a randomized pre selected tiles option</li>
-            <li>Click the Play button </li>
-            <li>Click pause button to pause the simulation</li>
-            <h5>Custom Options</h5>
-            <li>Click directly on speed value and type a value or use button to increase the speed, then click button</li>
-            <li>Select selected tiles color from color picker</li>
-         </p>
-        </Modal.Body>
-      </Modal>
+<InfoModal setShow={setShow} show={show}/>
 
 
     </div>
