@@ -1,13 +1,16 @@
 import React, { useState, useRef, useCallback } from 'react';
 import './App.css';
 import produce from 'immer'
-
+import Modal from 'react-bootstrap/Modal'
+import { Button } from 'react-bootstrap'; 
+// import Button from 'react-bootstrap/Button';
 
 
 function App() {
   const[generation, setgeneration]=useState(0)
   const [speed, setSpeed]=useState(500)
-  const[color, setColor]=useState('')
+  const[color, setColor]=useState('black')
+  const [show, setShow] = useState(false);
   const rows_number = 20; //TO BE DYNAMIC
   const cols_number = 20; //TO BE DYNAMIC
 
@@ -120,6 +123,9 @@ console.log('speed', typeof speed)
 
   return (
     <div className="App">
+       <Button variant="primary" onClick={() => setShow(true)}>
+        About
+      </Button>
       <section>
       <h1>Conway Game of Life</h1>
       <button
@@ -181,6 +187,61 @@ gridTemplateColumns: `repeat(${cols_number}, 26px)`}}>
 
 </div>
 </div>
+
+
+<Modal
+        show={show}
+        onHide={() => setShow(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title">
+           About
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+          The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, 
+          each of which is in one of two possible states, live or dead, (or populated and unpopulated, respectively). 
+          Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or
+           diagonally adjacent.
+          </p>
+        </Modal.Body>
+        <Modal.Header>
+          <Modal.Title id="example-custom-modal-styling-title">
+           Rules
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            <ol>
+          <li>Any live cell with two or three live neighbours lives on to the next generation.
+</li>
+<li>Any live cell with more than three live neighbours dies, as if by overpopulation.
+</li>
+<li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+</li>
+</ol>          </p>
+        </Modal.Body>
+        <Modal.Header>
+          <Modal.Title id="example-custom-modal-styling-title">
+           Get started
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            <li>You have the option of manually selecting any number of tiles OR clicking the random button for a randomized pre selected tiles option</li>
+            <li>Click the Play button </li>
+            <li>Click pause button to pause the simulation</li>
+            <h5>Custom Options</h5>
+            <li>Click directly on speed value and type a value or use button to increase the speed, then click button</li>
+            <li>Select selected tiles color from color picker</li>
+         </p>
+        </Modal.Body>
+      </Modal>
+
+
     </div>
   
   
