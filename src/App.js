@@ -1,8 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
 import './App.css';
 import produce from 'immer'
+import { Button } from 'react-bootstrap'; 
 import InfoModal from './InfoModal'
 import ButtonController from './ButtonControllers';
+import Grid from './Grid';
 import Sidebar from './SideBar';
 
 
@@ -117,7 +119,7 @@ function App() {
 
 
   return (
-    <div className="App">
+<div className="App">
       <section>
       <h1>Conway Game of Life</h1>
       <ButtonController
@@ -132,6 +134,13 @@ function App() {
       </section>
 
 {/* grid */}
+<div style={{display: 'inline-flex'}}>
+<div className="modalmenu">
+    <Button variant="warning" onClick={() => setShow(true)}> About</Button>
+  </div>
+
+<Grid cols_number={cols_number} grid={grid} produce={produce} setGrid={setGrid} color={color} />
+
 <Sidebar 
 setShow={setShow}
 cols_number={cols_number}
@@ -144,6 +153,8 @@ changespeed={changespeed}
 decreaseSpeed={decreaseSpeed}
 setColor={setColor}
 />
+</div>
+
 
 
 <InfoModal setShow={setShow} show={show}/>

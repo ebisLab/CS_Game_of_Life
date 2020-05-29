@@ -1,17 +1,9 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'; 
-import Grid from './Grid'
 
 
-const Sidebar = ({setShow, cols_number,speed, grid, produce, setGrid, color, generation, increaseSpeed, changespeed, decreaseSpeed, setColor})=>{
+const Sidebar = ({generation, increaseSpeed, speed, changespeed, decreaseSpeed, color, setColor})=>{
     return(
-<div style={{display: 'inline-flex'}}>
-  <div className="modalmenu"><Button variant="warning" onClick={() => setShow(true)}>
-        About
-      </Button></div>
-
-<Grid cols_number={cols_number} grid={grid} produce={produce} setGrid={setGrid} color={color} />
-{/* side bar */}
 <div style={{ padding: "20px", right:" 100px", position: "absolute"}}>
       <h3>Generation: {generation}</h3>
 
@@ -34,9 +26,7 @@ const Sidebar = ({setShow, cols_number,speed, grid, produce, setGrid, color, gen
   {console.log('color', color)}
 </div>
 
-</div>
-</div>
-    )
+</div>    )
 }
 
 export default Sidebar
