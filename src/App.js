@@ -1,8 +1,9 @@
 import React, { useState, useRef, useCallback } from 'react';
 import './App.css';
 import produce from 'immer'
-import { Button } from 'react-bootstrap'; 
 import InfoModal from './InfoModal'
+import ButtonController from './ButtonControllers';
+import Sidebar from './SideBar';
 
 
 function App() {
@@ -117,99 +118,32 @@ function App() {
 
   return (
     <div className="App">
-       {/* <Button variant="primary" onClick={() => setShow(true)}>
-        About
-      </Button> */}
       <section>
       <h1>Conway Game of Life</h1>
-      <Button
-      className="topbtn"
-      variant={runProgram? 'outline-danger': 'outline-success'}
-      onClick={()=>{
-          setRunProgram(!runProgram)
-          // start_ProgramRef.current = true;
-          start_Program()
-        }}
-      >{runProgram? 'Pause': 'Start'}</Button>
-      <Button
-      className="topbtn"
-      variant="outline-warning"
-      onClick={randomizeGrid}>Randomize</Button>
-            <Button
-            className="topbtn"
-            variant="outline-info"
-      onClick={()=>{
-        setGrid(createGrid())
-        setRunProgram(false)
-        setgeneration(0)
-        }}
-      >clear</Button>
+      <ButtonController
+      runProgram={runProgram}
+      setRunProgram={setRunProgram}
+      start_Program={start_Program}
+      randomizeGrid={randomizeGrid}
+      setGrid={setGrid}
+      createGrid={createGrid}
+      setgeneration={setgeneration}
+       />
       </section>
 
 {/* grid */}
-<div style={{display: 'inline-flex'}}>
-  <div className="modalmenu"><Button variant="warning" onClick={() => setShow(true)}>
-        About
-      </Button></div>
-
-<div 
-style={{display: 'grid',
-justifyContent: 'center',
-padding: 10,
-gridTemplateColumns: `repeat(${cols_number}, 20px)`}}>
-  {grid.map((rows,i)=>(
-    //for every row render a column
-    rows.map((cols,j) =>(
-      <div 
-      key={`${Math.floor(new Date().valueOf() * Math.random())}`}
-      onClick={()=>{
-        //set current value to 1
-        //we need to mutate the state
-        const newGrid = produce(grid, gridCopy => {
-          //creating a new grid value
-          //alive || dead toggle
-          gridCopy[i][j]=grid[i][j] ? 0: 1
-        } )
-        setGrid(newGrid)
-        console.log('I clicked this')
-      }}
-      style={{width: 20, 
-        height: 20,
-        boxShadow: grid[i][j]? "0px 0px 10px 0px #b3d8ff": undefined,
-        background: grid[i][j]? color : undefined,
-        border: '1px solid #21a0a0'
-
-        // border: '1px solid #68ffff'
-      }}>{cols}</div>
-        
-    ))
-  ))}
-</div>
-{/* side bar */}
-<div style={{ padding: "20px", right:" 100px", position: "absolute"}}>
-      <h3>Generation: {generation}</h3>
-
-
-<div style={{display: 'inline-flex'}}>
-
-  <Button variant="danger" style={{height: "40px", top: "30px", position: "relative"}} onClick={increaseSpeed}>+</Button>
-  <div className="cursor" style={{ position:"relative", padding:0, margin:0}}>
-  <input className="rq-form-element" style={{border: 'none', fontSize: 40, width: '140px', fontWeight: 'bolder',padding: '20px', background: "#301547",
-    color: "#ff1696"}} value={speed} onChange={changespeed}/>
-    <i></i>
-    </div>
-  <Button variant="danger" style={{height: "40px", top: "30px", position: "relative"}} onClick={decreaseSpeed}>-</Button>
-
-</div>
-
-<div>
-  <h2>Color:</h2>
-  <input type="color" value={color} onChange={(e)=> setColor(e.target.value)}/>
-  {console.log('color', color)}
-</div>
-
-</div>
-</div>
+<Sidebar 
+setShow={setShow}
+cols_number={cols_number}
+grid={grid}
+color={color}
+generation={generation}
+increaseSpeed={increaseSpeed}
+speed={speed}
+changespeed={changespeed}
+decreaseSpeed={decreaseSpeed}
+setColor={setColor}
+/>
 
 
 <InfoModal setShow={setShow} show={show}/>
