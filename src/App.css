@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background: #301547;
+
 }
 
 .App-logo {
@@ -34,5 +36,87 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+html{
+    background: #301547;
+
+}
+
+h1,h2,h3,h4,h5{
+  color:#fdee49;
+  text-shadow: 0 0 5px #fff1cc;
+}
+
+.topbtn{
+  margin: 10px;
+}
+
+
+
+input:focus{
+  outline: none;
+}
+
+
+
+
+
+.blinking-cursor {
+  font-size: 40px;
+  animation: 1s blink step-end infinite;
+  top: -5px;
+  left: -25px;
+  position: relative;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: black;
+  }
+}
+
+@-webkit-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-ms-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+@-o-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
   }
 }

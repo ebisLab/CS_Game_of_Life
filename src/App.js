@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 function App() {
   const[generation, setgeneration]=useState(0)
   const [speed, setSpeed]=useState(500)
-  const[color, setColor]=useState('black')
+  const[color, setColor]=useState('white')
   const [show, setShow] = useState(false);
   const rows_number = 20; //TO BE DYNAMIC
   const cols_number = 20; //TO BE DYNAMIC
@@ -127,23 +127,30 @@ function App() {
       </Button>
       <section>
       <h1>Conway Game of Life</h1>
-      <button
+      <Button
+      className="topbtn"
+      variant={runProgram? 'outline-danger': 'outline-success'}
       onClick={()=>{
           setRunProgram(!runProgram)
           // start_ProgramRef.current = true;
           start_Program()
           console.log('I clicked on start!')
         }}
-      >{runProgram? 'Pause': 'Start'}</button>
-      <button
-      onClick={randomizeGrid}>Randomize</button>
-            <button
+      >{runProgram? 'Pause': 'Start'}</Button>
+      <Button
+      className="topbtn"
+      variant="outline-warning"
+      onClick={randomizeGrid}>Randomize</Button>
+            <Button
+            className="topbtn"
+            variant="outline-info"
       onClick={()=>{
         setGrid(createGrid())
+        setRunProgram(false)
         setgeneration(0)
           console.log('I clicked on start!')
         }}
-      >clear</button>
+      >clear</Button>
       </section>
 
 {/* grid */}
@@ -171,17 +178,23 @@ gridTemplateColumns: `repeat(${cols_number}, 24px)`}}>
       }}
       style={{width: 25, 
         height: 22,
+        boxShadow: grid[i][j]? "0px 0px 10px 0px #b3d8ff": undefined,
         background: grid[i][j]? color : undefined,
          border: '1px solid black'}}>{cols}</div>
     ))
   ))}
 </div>
-<div style={{ padding: "20px", right:" 200px", position: "absolute"}}>
+<div style={{ padding: "20px", right:" 100px", position: "absolute"}}>
       <h3>Generation: {generation}</h3>
-<div>
-  <h2><input style={{border: 'none', fontSize: 40, width: 100, fontWeight: 'bolder'}}value={speed} onChange={changespeed}/></h2>
-  <button onClick={increaseSpeed}>+</button>
-  <button onClick={decreaseSpeed}>-</button>
+<div style={{display: 'inline-flex'}}>
+s
+  <Button variant="danger" style={{height: "40px", top: "30px", position: "relative"}} onClick={increaseSpeed}>+</Button>
+  <div id="input_container" style={{ position:"relative", padding:0, margin:0}}>
+  <input id="input" style={{border: 'none', fontSize: 40, width: '140px', fontWeight: 'bolder',padding: '20px', background: "#301547",
+    color: "#ff1696"}}value={speed} onChange={changespeed}/>
+    <span className="blinking-cursor">|</span>
+    </div>
+  <Button variant="danger" style={{height: "40px", top: "30px", position: "relative"}} onClick={decreaseSpeed}>-</Button>
 
 </div>
 
