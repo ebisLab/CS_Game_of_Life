@@ -31,7 +31,11 @@ gridTemplateColumns: `repeat(${cols_number}, 20px)`}}>
         border: '1px solid #21a0a0'
 
         // border: '1px solid #68ffff'
-      }}>{cols}</div>
+      }}>
+        {/* {cols} */}
+      
+      </div>
+      
         
     ))
   ))}

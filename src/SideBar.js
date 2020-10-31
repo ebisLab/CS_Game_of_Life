@@ -23,7 +23,6 @@ const Sidebar = ({generation, increaseSpeed, speed, changespeed, decreaseSpeed, 
 <div>
   <h2>Color:</h2>
   <input type="color" value={color} onChange={(e)=> setColor(e.target.value)}/>
-  {console.log('color', color)}
 </div>
 
 </div>    )
